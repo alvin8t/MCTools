@@ -1,0 +1,22 @@
+{
+	"name": "MCTools",
+	"productName": "MCTools",
+	"version": "0.0.1",
+	"description": "Minecraft Tools",
+	"author": "alvin8t",
+	"main": "main.js",
+	"devDependencies": {
+		"electron": "^1.7.5",
+		"electron-builder": "^19.27.7"
+	},
+	"dependencies": {
+		"electron-builder-squirrel-windows": "^19.28.3",
+		"electron-store": "^1.2.0"
+	  },
+	"scripts": {
+		"start": "electron .",
+		"package-win": "electron-packager . --overwrite --asar=true --platform=win32 --arch=ia32 --icon=em_sw.ico --prune=true --out=builds/ --version-string.ProductName=\"MCTools\"",
+		"pack": "electron-builder --dir",
+		"dist": "node build.js"
+	}
+}
