@@ -25,6 +25,12 @@ const menuHomeTemplate = [
 			{
 				label: 'Tellraw Generator',
 				click: function() {
+					gotoTellraw()
+				}
+			},
+			{
+				label: 'Knowledge Book Generator',
+				click: function() {
 					gotoKnowledge()
 				}
 			}
@@ -81,7 +87,18 @@ function gotoLTG() {
 	}))
 
 	currentWin = 'ltg'
+}
 
+function gotoTellraw() {
+	if (currentWin == 'tellraw') return
+	
+	MainWin.loadURL(url.format({
+		pathname: path.join(__dirname, 'html/tellraw.html'),
+		protocol: 'file:',
+		slashes: true
+	}))
+
+	currentWin = 'tellraw'
 }
 
 function gotoKnowledge() {
@@ -94,5 +111,4 @@ function gotoKnowledge() {
 	}))
 
 	currentWin = 'knowledge'
-
 }

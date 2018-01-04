@@ -1,0 +1,102 @@
+@font-face {
+	font-family: 'gamefont';
+	src: url('../fonts/VT323-Regular.ttf') format('truetype');
+}
+
+.mono-font {
+	font-family: 'gamefont', monospace !important;
+}
+
+p#previewWindow {
+    background-color: rgb(127, 127, 127);
+    border-radius: 2px;
+}
+
+.previewText {
+    font-size: 2em;
+}
+
+.text-white {
+    color: rgb(255, 255, 255);
+    /* background-color: rgb(127, 127, 127); */
+}
+
+.text-yellow {
+    color: rgb(255, 255, 0);
+}
+
+.text-light-purple {
+    color: rgb(253, 77, 255);
+}
+
+.text-red {
+    color: rgb(255, 90, 80);
+}
+
+.text-aqua {
+    color: rgb(90, 255, 255);
+}
+
+.text-green {
+    color: rgb(90, 255, 0);
+}
+
+.text-blue {
+    color: rgb(84, 76, 255);
+}
+
+.text-dark-gray {
+    color: rgb(85, 85, 85);
+}
+
+.text-gray {
+    color: rgb(170, 170, 170);
+}
+
+.text-gold {
+    color: rgb0(254, 172, 0);
+}
+
+.text-dark-purple {
+    color: rgb(169, 0, 178);
+}
+
+.text-dark-red {
+    color: rgb(169, 4, 0);
+}
+
+.text-dark-aqua {
+    color: rgb(19, 170, 171);
+}
+
+.text-dark-green {
+    color: rgb(20, 171, 0);
+}
+
+.text-dark-blue {
+    color: rgb(0, 0, 178);
+}
+
+.text-black {
+    color: rgb(0, 0, 0);
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.italic {
+	font-style: italic;
+}
+
+.underline {
+	text-decoration: underline;
+}
+
+.strike {
+	text-decoration: line-through;
+}
+
+.strikeunderline {
+	text-decoration: underline line-through;
+}
