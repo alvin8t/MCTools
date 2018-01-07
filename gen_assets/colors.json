@@ -1,0 +1,82 @@
+[
+    {
+        "color": "White",
+        "name": "white",
+        "default": true
+    },
+    {
+        "color": "Yellow",
+        "name": "yellow",
+        "default": false
+    },
+    {
+        "color": "Light Purple",
+        "name": "light_purple",
+        "default": false
+    },
+    {
+        "color": "Red",
+        "name": "red",
+        "default": false
+    },
+    {
+        "color": "Aqua",
+        "name": "aqua",
+        "default": false
+    },
+    {
+        "color": "Green",
+        "name": "green",
+        "default": false
+    },
+    {
+        "color": "Blue",
+        "name": "blue",
+        "default": false
+    },
+    {
+        "color": "Dark Gray",
+        "name": "dark_gray",
+        "default": false
+    },
+    {
+        "color": "Gray",
+        "name": "gray",
+        "default": false
+    },
+    {
+        "color": "Gold",
+        "name": "gold",
+        "default": false
+    },
+    {
+        "color": "Dark Purple",
+        "name": "dark_purple",
+        "default": false
+    },
+    {
+        "color": "Dark Red",
+        "name": "dark_red",
+        "default": false
+    },
+    {
+        "color": "Dark Aqua",
+        "name": "dark_aqua",
+        "default": false
+    },
+    {
+        "color": "Dark Green",
+        "name": "dark_green",
+        "default": false
+    },
+    {
+        "color": "Dark Blue",
+        "name": "dark_blue",
+        "default": false
+    },
+    {
+        "color": "Black",
+        "name": "black",
+        "default": false
+    }
+]

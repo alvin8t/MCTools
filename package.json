@@ -10,9 +10,11 @@
 		"electron-builder": "^19.27.7"
 	},
 	"dependencies": {
+		"asar": "^0.14.0",
 		"electron-builder-squirrel-windows": "^19.28.3",
-		"electron-store": "^1.2.0"
-	  },
+		"electron-store": "^1.2.0",
+		"request": "^2.83.0"
+	},
 	"scripts": {
 		"start": "electron .",
 		"package-win": "electron-packager . --overwrite --asar=true --platform=win32 --arch=ia32 --icon=em_sw.ico --prune=true --out=builds/ --version-string.ProductName=\"MCTools\"",

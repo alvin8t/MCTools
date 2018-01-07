@@ -1,0 +1,38 @@
+[
+    {
+        "name": "Tellraw",
+        "id": "tellraw",
+        "command_base": "tellraw",
+        "default": true,
+        "requirements": false,
+        "nbt": false,
+        "command": "/tellraw ${{ selector }} ${{ json_text_format }}"
+    },
+    {
+        "name": "Title",
+        "id": "title",
+        "command_base": "title",
+        "default": false,
+        "requirements": false,
+        "nbt": false,
+        "command": "/title {{ selector }} title {{ json_text_format }}"
+    },
+    {
+        "name": "Subtitle",
+        "id": "subtitle",
+        "command_base": "title",
+        "default": false,
+        "requirements": false,
+        "nbt": false,
+        "command": "/title {{ selector }} subtitle {{ json_text_format }}"
+    },
+    {
+        "name": "Action Bar",
+        "id": "action_bar",
+        "command_base": "title",
+        "default": false,
+        "requirements": false,
+        "nbt": false,
+        "command": "/title {{ selector }} actionbar {{ json_text_format }}"
+    }
+]
