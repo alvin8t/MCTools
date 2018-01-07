@@ -1,7 +1,7 @@
 {
 	"name": "MCTools",
 	"productName": "MCTools",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "Minecraft Tools",
 	"author": "alvin8t",
 	"main": "main.js",
