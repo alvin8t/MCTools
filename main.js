@@ -221,3 +221,8 @@ ipcMain.on('getGenAsset', function (event, args) {
 	// })
 	event.returnValue = JSON.parse(fs.readFileSync(path.join(appdataPath, `\\.mctools\\genFiles\\${asset}.json`)))
 })
+
+ipcMain.on('gotoTellraw', function(event, args) {
+	gotoTellraw()
+})
+
