@@ -2,7 +2,40 @@ const {ipcRenderer} = require('electron')
 
 var textCount = 0
 
-alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+var bs64AlphNum = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+
+var colors = ipcRenderer.sendSync('getGenAsset', 'colors')
+var tellraw_options = ipcRenderer.sendSync('getGenAsset', 'tellraw_op')
+
+var defaultTaken = false
+$.each(colors, function(key, value) {
+	var select = document.getElementById('templateGenColor1')
+	var option = document.createElement('option')
+	option.setAttribute('value', value['name'])
+	if (defaultTaken == false && value['default'] == true) {
+		option.setAttribute('selected', 'true')
+		defaultTaken = true
+	}
+	option.innerHTML = value['color']
+	select.appendChild(option)
+})
+defaultTaken = false
+$.each(tellraw_options, function(key, value) {
+	var select = document.getElementById('cmdType')
+	var option = document.createElement('option')
+	option.setAttribute('value', key)
+	if (defaultTaken == false && value['default'] == true) {
+		option.setAttribute('selected', 'true')
+		defaultTaken = true
+	}
+	option.innerHTML = value['name']
+	select.appendChild(option)
+})
+
+addAddOptionCmdType()
+
+$('#cmdType').addClass('selectpicker')
+$('#cmdType').selectpicker('render')
 
 $('.formatting').click(function() {
 	if (this.classList.contains('btn-danger') == true) {
@@ -18,7 +51,8 @@ $('.formatting').click(function() {
 
 $('#addText').click(function() {
 	var template = $('.template-text').clone(true).addClass('generatorText').removeClass('template-text')
-	$(template).find('select.select-template').attr({'id': 'picker' + textCount}).addClass('selectpicker').removeClass('select-template')
+	$(template).find('select.select-template').attr({'id': 'picker' + textCount}).addClass('selectpicker color').removeClass('select-template')
+	
 	$(template).appendTo('#main-gen')
 	$('#picker' + textCount).selectpicker('render')
 	textCount++
@@ -79,18 +113,37 @@ $('#genJSON').click(function() {
 		arr[parseInt(key)] = jsonData[key];
 	}
 
-	if (option == 'tellraw') {
-		cmd = `/tellraw ${$('#cmdSelector').val()} {"text":"","extra":${JSON.stringify(arr)}}`
-	} else if (option == 'title') {
-		cmd = `/title ${$('#cmdSelector').val()} title {"text":"","extra":${JSON.stringify(arr)}}`
-	} else if (option == 'subtitle') {
-		cmd = `/title ${$('#cmdSelector').val()} subtitle {"text":"","extra":${JSON.stringify(arr)}}`
-	} else if (option == 'action_bar') {
-		cmd = `/title ${$('#cmdSelector').val()} actionbar {"text":"","extra":${JSON.stringify(arr)}}`
-	} else if (option == 'raw') {
-		cmd = `{"text":"","extra":${JSON.stringify(arr)}}`
+	// if (option == 'tellraw') {
+	// 	cmd = `/tellraw ${$('#cmdSelector').val()} {"text":"","extra":${JSON.stringify(arr)}}`
+	// } else if (option == 'title') {
+	// 	cmd = `/title ${$('#cmdSelector').val()} title {"text":"","extra":${JSON.stringify(arr)}}`
+	// } else if (option == 'subtitle') {
+	// 	cmd = `/title ${$('#cmdSelector').val()} subtitle {"text":"","extra":${JSON.stringify(arr)}}`
+	// } else if (option == 'action_bar') {
+	// 	cmd = `/title ${$('#cmdSelector').val()} actionbar {"text":"","extra":${JSON.stringify(arr)}}`
+	// } else if (option == 'raw') {
+	// 	cmd = `{"text":"","extra":${JSON.stringify(arr)}}`
+	// } else {
+	// 	cmd = 'INVALID SELECTOR'
+	// }
+
+	var tellrawJson = JSON.stringify(arr)
+
+	if (option == 'raw') {
+		cmd = `{"text":"","extra":${tellrawJson}}`
+	} else if (option == 'raw_escaped') {
+		var tmp = `{"text":"","extra":${tellrawJson.replace(/[\\]/g, '\\\\')}}`
+		cmd = tmp.replace(/[\"]/g, '\\"')
 	} else {
-		cmd = 'INVALID SELECTOR'
+		if (tellraw_options[option]) {
+			var tmpSplit = tellraw_options[option]['command'].split('$')
+			$.each(tmpSplit, function (key, value) {
+				var appendCmd
+				appendCmd = value.replace('{{ selector }}', $('#cmdSelector').val().trim()).replace('{{ json_text_format }}', JSON.stringify(arr).trim())
+				cmd += appendCmd
+			})
+		} else {
+		}
 	}
 
 	$('#printJsonOutput').val(cmd)
@@ -100,8 +153,8 @@ $('#genJSON').click(function() {
 })
 
 $('#printJsonOutput').click(function() {
-	this.focus();
-    this.select();
+	this.focus()
+    this.select()
 })
 
 var calPreview
@@ -205,7 +258,7 @@ function genPreview() {
 				if (obfPre.index == ' ') {
 					newText += ' '
 				} else {
-					newText += alphabet[Math.floor(Math.random() * alphabet.length)]
+					newText += bs64AlphNum[Math.floor(Math.random() * bs64AlphNum.length)]
 				}
 			})
 			values['text'] = newText
@@ -217,4 +270,19 @@ function genPreview() {
 		$(span).appendTo('#previewWindow')
 	})
 
+}
+
+function addAddOptionCmdType() {
+	var selectRaw = document.getElementById('cmdType')
+	var optionRaw = document.createElement('option')
+	optionRaw.setAttribute('value', 'raw')
+	optionRaw.innerHTML = 'Raw'
+	selectRaw.appendChild(optionRaw)
+
+	var selectRawE = document.getElementById('cmdType')
+	var optionRawE = document.createElement('option')
+
+	optionRawE.setAttribute('value', 'raw_escaped')
+	optionRawE.innerHTML = 'Raw [Escaped]'
+	selectRawE.appendChild(optionRawE)
 }
