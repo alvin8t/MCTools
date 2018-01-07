@@ -11,7 +11,9 @@ const request = require('request')
 // const request = require('request')
 
 const config = new Store()
-const APP_VERSION = '0.0.2'
+const APP_VERSION = '0.0.3'
+
+const appdataPath = app.getPath('appData')
 
 const menuHomeTemplate = [
 	{
@@ -68,7 +70,6 @@ app.setName('MC Tools')
 
 function createWindow() {
 
-	var appdataPath = app.getPath('appData')
 	// console.log(appdataPath).
 	if (!fs.existsSync(path.join(appdataPath, '\\.mctools\\genFiles'))){
 		fs.mkdirSync(path.join(appdataPath, '\\.mctools'))
@@ -130,7 +131,7 @@ function createWindow() {
 		icon: 'em_sw.ico',
 		minHeight: 480,
 		minWidth: 852,
-		backgroundColor: '#000000'
+		backgroundColor: '#E75858'
     })
 	Menu.setApplicationMenu(menuHome)
 	MainWin.loadURL(url.format({
